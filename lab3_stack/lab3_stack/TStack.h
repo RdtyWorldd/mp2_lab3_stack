@@ -23,6 +23,7 @@ public:
   void push(T obj);
   T top() const;
 
+  void clear();
   //операторы
   TStack& operator= (const TStack<T>& stack);
   bool operator== (const TStack<T>& stack);
@@ -35,20 +36,20 @@ public:
 template <class T>
 TStack<T>::TStack(size_t _maxSize) 
 {
-  if (size < 1 || size >= STACK_MAX_SIZE)
+  if (_maxSize < 1 || _maxSize >= STACK_MAX_SIZE )
 	throw out_of_range("maxSize is out of range");
   maxSize = _maxSize;
-  Num = -1;
+  lastNum = -1;
   pMem = new T[maxSize];
 }
 
 template <class T>
 TStack<T>::TStack(const TStack<T>& stack) 
 {
-  maxSize = _maxSize;
-  Num = -1;
+  maxSize = stack.maxSize;
+  lastNum = stack.lastNum;
   pMem = new T[maxSize];
-  for (int i = 0; i <= Num; i++)
+  for (int i = 0; i <= lastNum; i++)
 	pMem[i] = stack.pMem[i];
 }
 
@@ -74,8 +75,8 @@ template <class T>
 T TStack<T>::pop()
 {
   if (isEmpty()) throw exception("stack is empty");
-  T tmp = pMem[Num];
-  Num--;
+  T tmp = pMem[lastNum];
+  lastNum--;
   return tmp;
 }
 
@@ -90,6 +91,12 @@ template<class T>
 inline T TStack<T>::top() const
 {
   return pMem[lastNum];
+}
+
+template<class T>
+inline void TStack<T>::clear()
+{
+  lastNum = -1;
 }
 
 template <class T>

@@ -16,3 +16,10 @@ bool check(string str) {
   if (!s.isEmpty()) return false;
   return true;
 }
+
+
+
+int main()
+{
+
+}
