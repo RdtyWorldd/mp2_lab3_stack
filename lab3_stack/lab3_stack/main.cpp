@@ -1,4 +1,5 @@
-#include "Stack.h"
+#include "TStack.h"
+#include "TCalc.h"
 #include <string>
 
 bool check(string str) {
@@ -21,5 +22,12 @@ bool check(string str) {
 
 int main()
 {
-
+  TCalc<double> calc;
+  // "((2 + 3) * 4) - 5"
+  calc.setInfix("((5 + 3) * 1488) - (5+1) * 1488 ");
+  //calc.setPostfix("1 2 3 + *");
+  calc.toPostfix();
+  cout << calc.getInfix() << endl;
+  cout << calc.getPostfix() << endl;
+  cout << calc.calc();
 }

@@ -129,7 +129,7 @@
   <ItemGroup>
     <ClCompile Include="gtest-all.cc" />
     <ClCompile Include="test_main.cpp" />
-    <ClCompile Include="test_tmatrix.cpp" />
+    <ClCompile Include="test_stack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gtest.h" />

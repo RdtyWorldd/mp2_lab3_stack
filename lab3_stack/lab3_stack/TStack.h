@@ -8,7 +8,7 @@ using namespace std;
 template <class T>
 class TStack {
   size_t maxSize; // максимальный размер стека
-  size_t lastNum; //индекс последнего элемента
+  int lastNum; //индекс последнего элемента
   
   T* pMem; //указатель на память
 public:
@@ -62,7 +62,7 @@ inline TStack<T>::~TStack()
 template<class T>
 inline bool TStack<T>::isEmpty() const
 {
-  return lastNum != -1;
+  return lastNum == -1;
 }
 
 template<class T>
@@ -119,15 +119,43 @@ TStack<T>& TStack<T>::operator= (const TStack<T>& stack)
   return *this;
 }
 
-//template<class T>
-//inline bool TStack<T>::operator==(const TStack<T>& stack)
-//{
-//  return false;
-//}
-//
-//template<class T>
-//inline bool TStack<T>::operator!=(const TStack<T>& stack)
-//{
-//  return false;
-//}
+template<class T>
+inline bool TStack<T>::operator==(const TStack<T>& stack)
+{
+  if (this == &stack) return true;
+  if (maxSize == stack.maxSize && lastNum == stack.lastNum)
+  {
+	for (int i = 0; i <= lastNum; i++)
+	{
+	  if (pMem[i] != stack.pMem[i])
+		return false;
+	}
+	return true;
+  }
+  return false;
+}
 
+template<class T>
+inline bool TStack<T>::operator!=(const TStack<T>& stack)
+{
+  return !(*this == stack);
+}
+
+template<class T>
+inline ostream& operator<<(ostream& out, const TStack<T>& stack)
+{
+  out << stack.maxSize << ' ' << stack.lastNum << '\n';
+  for (int i = 0; i <= stack.lastNum; i++)
+	cout << stack.pMem[i] << ' ';
+  cout << endl;
+  return out;
+}
+
+template<class T>
+inline istream& operator>>(istream& in, TStack<T>& stack)
+{
+  in >> stack.maxSize >> stack.lastNum;
+  for (int i = 0; i <= stack.lastNum; i++)
+	in >> stack.pMem[i];
+  return in;
+}

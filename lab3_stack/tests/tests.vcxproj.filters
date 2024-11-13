@@ -21,7 +21,7 @@
     <ClCompile Include="test_main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="test_tmatrix.cpp">
+    <ClCompile Include="test_stack.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
