@@ -1,18 +1,18 @@
 #pragma once
 #include <iostream>
 
-using namespace std;
+//using namespace std;
 
 #define STACK_MAX_SIZE 100
 
 template <class T>
 class TStack {
-  size_t maxSize; // максимальный размер стека
+  int maxSize; // максимальный размер стека
   int lastNum; //индекс последнего элемента
   
   T* pMem; //указатель на память
 public:
-  TStack(size_t maxSize = 5); // конструктор 
+  TStack(int maxSize = 5); // конструктор 
   TStack(const TStack<T>& stack); // конструктор копирования
   ~TStack(); //деструктор
   
@@ -29,15 +29,15 @@ public:
   bool operator== (const TStack<T>& stack);
   bool operator!= (const TStack<T>& stack);
   //операторы вывода
-  friend ostream& operator<< (ostream& out, const TStack<T>& stack);
-  friend istream& operator>> (istream& in, TStack<T>& stack);
+  friend std::ostream& operator<< (std::ostream& out, const TStack<T>& stack);
+  friend std::istream& operator>> (std::istream& in, TStack<T>& stack);
 };
 
 template <class T>
-TStack<T>::TStack(size_t _maxSize) 
+TStack<T>::TStack(int _maxSize) 
 {
   if (_maxSize < 1 || _maxSize >= STACK_MAX_SIZE )
-	throw out_of_range("maxSize is out of range");
+	throw std::out_of_range("maxSize is out of range");
   maxSize = _maxSize;
   lastNum = -1;
   pMem = new T[maxSize];
@@ -74,7 +74,7 @@ inline bool TStack<T>::isFull() const
 template <class T>
 T TStack<T>::pop()
 {
-  if (isEmpty()) throw exception("stack is empty");
+  if (isEmpty()) throw std::exception("stack is empty");
   T tmp = pMem[lastNum];
   lastNum--;
   return tmp;
@@ -82,7 +82,7 @@ T TStack<T>::pop()
 
 template <class T>
 void TStack<T>::push(T obj) {
-  if (isFull()) throw exception("stack overflow");
+  if (isFull()) throw std::exception("stack overflow");
   lastNum++;
   pMem[lastNum] = obj;
 }
@@ -142,17 +142,17 @@ inline bool TStack<T>::operator!=(const TStack<T>& stack)
 }
 
 template<class T>
-inline ostream& operator<<(ostream& out, const TStack<T>& stack)
+inline std::ostream& operator<<(std::ostream& out, const TStack<T>& stack)
 {
   out << stack.maxSize << ' ' << stack.lastNum << '\n';
   for (int i = 0; i <= stack.lastNum; i++)
-	cout << stack.pMem[i] << ' ';
-  cout << endl;
+	out << stack.pMem[i] << ' ';
+  out << std::endl;
   return out;
 }
 
 template<class T>
-inline istream& operator>>(istream& in, TStack<T>& stack)
+inline std::istream& operator>>(std::istream& in, TStack<T>& stack)
 {
   in >> stack.maxSize >> stack.lastNum;
   for (int i = 0; i <= stack.lastNum; i++)
