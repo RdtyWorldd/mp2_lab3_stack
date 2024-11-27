@@ -15,7 +15,7 @@ class TCalc {
   bool isOperation(char ch);
 public:
   TCalc();
-  
+
   void setInfix(std::string _infix);
   std::string getInfix();
 
@@ -24,6 +24,7 @@ public:
 
   void toPostfix();
   
-  double tcalc();
+  double postfixCalc();
+
   double calc();
 };

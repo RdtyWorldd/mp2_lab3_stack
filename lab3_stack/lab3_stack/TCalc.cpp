@@ -95,7 +95,7 @@ void TCalc::toPostfix()
   }
 }
 
-double TCalc::tcalc()
+double TCalc::postfixCalc()
 {
   stNum.clear();
   for (int i = 0; i < postfix.size(); i++)

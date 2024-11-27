@@ -26,17 +26,30 @@ public:
   void clear();
   //операторы
   TStack& operator= (const TStack<T>& stack);
-  bool operator== (const TStack<T>& stack);
-  bool operator!= (const TStack<T>& stack);
+  bool operator== (const TStack<T>& stack) const;
+  bool operator!= (const TStack<T>& stack) const;
   //операторы вывода
-  friend std::ostream& operator<< (std::ostream& out, const TStack<T>& stack);
-  friend std::istream& operator>> (std::istream& in, TStack<T>& stack);
+  friend std::ostream& operator<< (std::ostream& out, const TStack<T>& stack)
+  {
+	out << stack.maxSize << ' ' << stack.lastNum << '\n';
+	for (int i = 0; i <= stack.lastNum; i++)
+	  out << stack.pMem[i] << ' ';
+	out << std::endl;
+	return out;
+  }
+  friend std::istream& operator>> (std::istream& in, TStack<T>& stack) 
+  {
+	in >> stack.maxSize >> stack.lastNum;
+	for (int i = 0; i <= stack.lastNum; i++)
+	  in >> stack.pMem[i];
+	return in;
+  }
 };
 
 template <class T>
 TStack<T>::TStack(int _maxSize) 
 {
-  if (_maxSize < 1 || _maxSize >= STACK_MAX_SIZE )
+  if (_maxSize < 1 || _maxSize > STACK_MAX_SIZE )
 	throw std::out_of_range("maxSize is out of range");
   maxSize = _maxSize;
   lastNum = -1;
@@ -120,7 +133,7 @@ TStack<T>& TStack<T>::operator= (const TStack<T>& stack)
 }
 
 template<class T>
-inline bool TStack<T>::operator==(const TStack<T>& stack)
+inline bool TStack<T>::operator==(const TStack<T>& stack) const
 {
   if (this == &stack) return true;
   if (maxSize == stack.maxSize && lastNum == stack.lastNum)
@@ -136,26 +149,7 @@ inline bool TStack<T>::operator==(const TStack<T>& stack)
 }
 
 template<class T>
-inline bool TStack<T>::operator!=(const TStack<T>& stack)
+inline bool TStack<T>::operator!=(const TStack<T>& stack) const
 {
   return !(*this == stack);
-}
-
-template<class T>
-inline std::ostream& operator<<(std::ostream& out, const TStack<T>& stack)
-{
-  out << stack.maxSize << ' ' << stack.lastNum << '\n';
-  for (int i = 0; i <= stack.lastNum; i++)
-	out << stack.pMem[i] << ' ';
-  out << std::endl;
-  return out;
-}
-
-template<class T>
-inline std::istream& operator>>(std::istream& in, TStack<T>& stack)
-{
-  in >> stack.maxSize >> stack.lastNum;
-  for (int i = 0; i <= stack.lastNum; i++)
-	in >> stack.pMem[i];
-  return in;
 }

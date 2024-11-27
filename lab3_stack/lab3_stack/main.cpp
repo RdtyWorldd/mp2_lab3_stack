@@ -24,10 +24,11 @@ int main()
 {
   TCalc calc;
   // "((2 + 3) * 4) - 5"
-  calc.setInfix("2^5 / (3+7)");
+  calc.setInfix("(2.22 + 3.33) * (1 - 2^2)");
   //calc.setPostfix("1 2 3 + *");
-  //calc.toPostfix();
+  calc.toPostfix();
   std::cout << calc.getInfix() << std::endl;
   //std::cout << calc.getPostfix() << std::endl;
-  std::cout << calc.calc();
+  std::cout << calc.calc() <<'\n';
+  std::cout << calc.postfixCalc();
 }
